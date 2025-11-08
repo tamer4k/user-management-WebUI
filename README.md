@@ -1,59 +1,141 @@
-# UserManagementWebUI
+# 👥 User Management WebUI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+Een moderne Angular applicatie voor gebruikersbeheer met real-time updates via SignalR.
 
-## Development server
+## 🚀 Features
 
-To start a local development server, run:
+- ✅ **CRUD Operaties** - Gebruikers toevoegen, bekijken en verwijderen
+- ✅ **Real-time Updates** - SignalR integratie voor live synchronisatie
+- ✅ **Paginatie** - 25 gebruikers per pagina voor betere performance
+- ✅ **Validatie** - Email en wachtwoord validatie
+- ✅ **Responsive Design** - Werkt op desktop en mobiel
+- ✅ **Modern UI** - Schone, gebruiksvriendelijke interface
 
+## 🛠️ Technologieën
+
+- **Angular 19** (Standalone Components)
+- **TypeScript**
+- **RxJS** voor reactive programming
+- **SignalR** voor real-time communicatie
+- **SCSS** voor styling
+- **Vite** als build tool
+
+## 📋 Vereisten
+
+- Node.js (v18 of hoger)
+- npm (v9 of hoger)
+- Backend API draaiend op `http://localhost:5151`
+
+## 🏃‍♂️ Installatie
+
+1. Clone de repository:
 ```bash
-ng serve
+git clone https://github.com/tamer4k/user-management-WebUI.git
+cd user-management-WebUI
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+2. Installeer dependencies:
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+3. Start de development server:
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+4. Open je browser en ga naar `http://localhost:4200`
 
-To build the project run:
+## 📦 Project Structuur
 
-```bash
-ng build
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── add-user/          # Formulier voor nieuwe gebruikers
+│   │   └── user-list/         # Lijst met paginatie
+│   ├── services/
+│   │   └── user.service.ts    # API communicatie
+│   ├── app.component.ts       # Root component
+│   └── app.routes.ts          # Routing configuratie
+├── environment.ts             # Environment variabelen
+└── index.html
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🔌 API Endpoints
 
-## Running unit tests
+De applicatie communiceert met deze endpoints:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- `GET /api/users` - Haal alle gebruikers op
+- `POST /api/users` - Voeg een nieuwe gebruiker toe
+- `DELETE /api/users/{id}` - Verwijder een gebruiker
+- `PUT /api/users/{id}` - Update een gebruiker
 
+## 📱 SignalR Hub
+
+- **Hub URL**: `http://localhost:5151/userHub`
+- **Event**: `UserChanged` - Wordt gefired bij wijzigingen
+
+## 🎨 Componenten
+
+### Add User Component
+Formulier voor het toevoegen van nieuwe gebruikers met validatie:
+- Naam (verplicht)
+- Email (verplicht, uniek)
+- Wachtwoord (verplicht, min. 6 karakters)
+
+### User List Component
+Lijst met gebruikers inclusief:
+- Paginatie (25 per pagina)
+- Real-time updates via SignalR
+- Verwijder functionaliteit
+- Info balk met statistieken
+
+## 🔧 Build
+
+Production build maken:
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+De build output komt in de `dist/` directory.
 
-For end-to-end (e2e) testing, run:
+## 🤝 Backend Repository
 
-```bash
-ng e2e
+Deze frontend werkt samen met de ASP.NET Core API:
+- Repository: `UserManagementAPI`
+- Technologie: ASP.NET Core 9.0, Entity Framework Core, SignalR
+
+## 📝 Environment Configuratie
+
+Pas `src/environment.ts` aan voor je eigen API URL:
+
+```typescript
+export const environment = {
+  apiBaseUrl: 'http://localhost:5151',
+  production: false
+};
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🐛 Troubleshooting
 
-## Additional Resources
+### SignalR verbinding mislukt
+- Zorg dat de backend draait op `http://localhost:5151`
+- Check CORS instellingen in de backend
+- Controleer browser console voor errors
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Paginatie werkt niet
+- Refresh de pagina
+- Check of er data is geladen (browser developer tools)
+
+## 📄 License
+
+Dit project is gemaakt voor educatieve doeleinden.
+
+## 👨‍💻 Auteur
+
+Tamer Al-Ashraf
+
+---
+
+⭐ Vergeet niet om de repository een ster te geven als je het nuttig vindt!
