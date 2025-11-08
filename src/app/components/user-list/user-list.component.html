@@ -1,0 +1,85 @@
+
+
+
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="🔍 ابحث عن مستخدم..."
+    (input)="search$.next($event.target.value)"
+  />
+</div>
+
+<div class="container">
+  <h2>👥 Gebruikerslijst</h2>
+
+  <div class="info-bar">
+    <p>Totaal: <strong>{{ users.length }}</strong> gebruikers | Pagina <strong>{{ currentPage }}</strong> van <strong>{{ totalPages }}</strong></p>
+  </div>
+
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Naam</th>
+        <th>Email</th>
+        <th>Acties</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of paginatedUsers">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <button class="btn-delete" (click)="deleteUser(user.id)">🗑 Verwijderen</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="no-users" *ngIf="users.length === 0">Geen gebruikers beschikbaar.</p>
+
+  <!-- Paginatie Controls -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button 
+      class="page-btn" 
+      (click)="previousPage()" 
+      [disabled]="currentPage === 1">
+      ‹ Vorige
+    </button>
+
+    <button 
+      *ngIf="currentPage > 3"
+      class="page-btn"
+      (click)="goToPage(1)">
+      1
+    </button>
+
+    <span *ngIf="currentPage > 3" class="dots">...</span>
+
+    <button 
+      *ngFor="let page of getPageNumbers()"
+      class="page-btn"
+      [class.active]="page === currentPage"
+      (click)="goToPage(page)">
+      {{ page }}
+    </button>
+
+    <span *ngIf="currentPage < totalPages - 2" class="dots">...</span>
+
+    <button 
+      *ngIf="currentPage < totalPages - 2"
+      class="page-btn"
+      (click)="goToPage(totalPages)">
+      {{ totalPages }}
+    </button>
+
+    <button 
+      class="page-btn" 
+      (click)="nextPage()" 
+      [disabled]="currentPage === totalPages">
+      Volgende ›
+    </button>
+  </div>
+</div>

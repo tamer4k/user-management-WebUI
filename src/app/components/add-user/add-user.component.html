@@ -1,0 +1,22 @@
+<div class="form-container">
+  <h2>➕ Nieuwe gebruiker toevoegen</h2>
+
+  <div class="form-group">
+    <label>Naam:</label>
+    <input type="text" [(ngModel)]="name" placeholder="Voer naam in" />
+  </div>
+
+  <div class="form-group">
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="email" placeholder="voorbeeld@mail.com" />
+  </div>
+
+  <div class="form-group">
+    <label>Wachtwoord:</label>
+    <input type="password" [(ngModel)]="password" placeholder="Minimaal 6 karakters" />
+  </div>
+
+  <button (click)="addUser()">Toevoegen</button>
+
+  <p class="message" *ngIf="message">{{ message }}</p>
+</div>
